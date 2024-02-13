@@ -9,6 +9,6 @@ function img_transformed = transform_image(grayImage, gauss_range, sigma)
 
         layer_combined = (layer_upper + layer_current) ./ (2 .^ mask_nonzero(yy-1, :)) .* (layer_current ~= 0);
 
-        img_transformed(yy,:) = blur_vect_nonzero(layer_combined, gauss_range, sigma);
+        img_transformed(yy,:) = blur_vect_nonzero(layer_combined, sigma, gauss_range);
     end
 end
