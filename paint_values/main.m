@@ -2,41 +2,40 @@ clc; clear; close all;
 addAllPaths()
 
 %% Paint image based on values
-colorMap = crameri('romaO');
+color_map = crameri('romaO');
 
-imgOrigin = imread('kwiat2.bmp');
-imgGray = preprocessGrayImage(imgOrigin);
+img_origin = imread('kwiat2.bmp');
+img_gray = preprocessGrayImage(img_origin);
 
-mask = imgGray ~=0;
+mask = img_gray ~=0;
 
-colorImage = colorizeImage(imgGray, mask, colorMap);
+color_img = colorizeImage(img_gray, mask, color_map);
 
 % Wyświetlenie obrazów
 figure()
-subplot(1, 2, 1), imshow(imgGray,[]), title('Obraz szary');
-subplot(1, 2, 2), imshow(colorImage,[]), title('Kolorowany obraz');
-
+subplot(1, 2, 1), imshow(img_gray,[]), title('Obraz szary');
+subplot(1, 2, 2), imshow(color_img,[]), title('Kolorowany obraz');
 
 
 %% Evolution over time
 
 % Create image data
 img_name = 'Picture3.png';
-imgOrigin = imread(img_name);
-grayImage = preprocessGrayImage(imgOrigin);
+img_origin = imread(img_name);
+gray_image = preprocessGrayImage(img_origin);
 
-mask = grayImage ~= 0;
+mask = gray_image ~= 0;
 
-colorMap = crameri('romaO');
+color_map = crameri('romaO');
 
-data_img = createDataImgAnimation(grayImage, mask, colorMap);
+data_img = createDataImgAnimation(gray_image, mask, color_map);
 
 % Create gif data
-outputFileName = 'test.gif'; 
+name_save_file = 'test.gif'; 
 shift_speed = 6;
 time_of_animation = 1; % Seconds
 
-data_gif = createDataGifAnimation(outputFileName, shift_speed, time_of_animation);
+data_gif = createDataGifAnimation(name_save_file, shift_speed, time_of_animation);
 
 % Create animation gif file
 
