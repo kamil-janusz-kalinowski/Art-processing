@@ -1,63 +1,51 @@
 clc; clear; close all;
-add_all_paths()
+addAllPaths()
 
 %% Paint image based on values
 colorMap = crameri('romaO');
 
-% Wczytaj obraz szary
-grayImage = rgb2gray(imread('zaby.jpg')); % Zmień 'nazwa_obrazu.jpg' na nazwę Twojego obrazu
-grayImage = (grayImage - min(grayImage,[],'all'))/max(grayImage,[],'all')*255;
-grayImage = round(grayImage);
+imgOrigin = imread('kwiat2.bmp');
+imgGray = preprocessGrayImage(imgOrigin);
 
-mask = grayImage > 15;
+mask = imgGray ~=0;
 
-colorImage = colorizeImage(grayImage, mask, colorMap);
+colorImage = colorizeImage(imgGray, mask, colorMap);
 
 % Wyświetlenie obrazów
 figure()
-subplot(1, 2, 1), imshow(grayImage,[]), title('Obraz szary');
-subplot(1, 2, 2), imshow(colorImage), title('Kolorowany obraz');
+subplot(1, 2, 1), imshow(imgGray,[]), title('Obraz szary');
+subplot(1, 2, 2), imshow(colorImage,[]), title('Kolorowany obraz');
 
 
 
 %% Evolution over time
-% Wczytaj obraz szary
-img_name = 'zaby.jpg';
-outputFileName = 'zaby2.gif'; 
 
-shift_speed = 2;
-time_of_animation = 2; % Seconds
-delayTime = time_of_animation/128;
-num_of_frames = round(256/shift_speed);
-repetition_factor = 1;
+% Create image data
+img_name = 'Picture3.png';
+imgOrigin = imread(img_name);
+grayImage = preprocessGrayImage(imgOrigin);
+
+mask = grayImage ~= 0;
+
 colorMap = crameri('romaO');
-colorMap = jet(256);
 
-img_origin = imread(img_name);
-grayImage = preprocessGrayImage(img_origin);
+data_img = createDataImgAnimation(grayImage, mask, colorMap);
 
-mask = grayImage > 30;
-grayImage = double(grayImage)*repetition_factor;
+% Create gif data
+outputFileName = 'test.gif'; 
+shift_speed = 6;
+time_of_animation = 1; % Seconds
 
-for ii = 1 : num_of_frames
-    colorImage = colorizeImageWithShift(grayImage, -ii*shift_speed, mask, colorMap);
-    writeGif(colorImage, outputFileName, delayTime);
+data_gif = createDataGifAnimation(outputFileName, shift_speed, time_of_animation);
 
-    disp(string(round(ii/num_of_frames*100,2))+"%")
-end
+% Create animation gif file
 
+grayImageToAnimation(data_img, data_gif);
 
 
-function colorImage = colorizeImageWithShift(grayImage, value_shift, mask, colorMap)
-    if nargin < 3
-        mask = grayImage ~= 0;
-    end
 
-    grayImage = double(grayImage) + value_shift * double(mask);
-    colorImage = colorizeImage(grayImage, mask, colorMap);
-end
 
-function add_all_paths()
+function addAllPaths()
     shared_resources_path = fullfile('..', 'Shared resources');
     
     addpath(genpath(shared_resources_path));
