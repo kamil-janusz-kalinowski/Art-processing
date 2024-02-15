@@ -3,6 +3,6 @@ function colorImage = colorizeImageWithShift(grayImage, value_shift, mask, color
         mask = grayImage ~= 0;
     end
 
-    grayImage = double(grayImage) + value_shift .* double(mask);
-    colorImage = colorizeImage(grayImage, mask, colorMap);
+    gray_image_shifted = double(grayImage) + value_shift .* double(mask);
+    colorImage = colorizeImage(gray_image_shifted, mask, colorMap);
 end

@@ -18,7 +18,7 @@ function vect_blur = blur_vect_nonzero(vect, sigma, gauss_size)
                 inds_replace = 1 : (ind_border-1);
                 
                 % Zastąpienie indeksów lustrzanym odbiciem
-                inds_to_replace = circshift(inds(inds_replace), [0, ind_border-1]);
+                inds_to_replace = inds( (ind_border+1) : ((ind_border+1) + length(inds_replace) - 1) );
                 inds(inds_replace) = inds_to_replace(end:-1:1);
             end
 
