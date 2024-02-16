@@ -63,7 +63,7 @@ title('Image transformed')
 % title('Przekształcony obraz');
 
 function addAllPaths()
-    shared_resources_path = fullfile('..', '..', '..', 'Shared resources');
+    shared_resources_path = fullfile('..', '..', 'Shared resources');
     
     addpath(genpath(shared_resources_path));
     addpath(genpath(pwd));
