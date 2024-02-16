@@ -1,6 +1,6 @@
 clc; clear; close all;
 addAllPaths()
-
+dbstop if error
 
 %% Paint image based on values
 color_map = crameri('romaO');
@@ -34,7 +34,7 @@ color_map = crameri('romaO');
 data_img = createDataImgAnimation(img_gray, mask, color_map);
 
 % Create gif data
-name_save_file = 'test.gif'; 
+name_save_file = 'test2.gif'; 
 shift_speed = 6;
 time_of_animation = 1; % Seconds
 

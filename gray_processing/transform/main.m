@@ -13,7 +13,7 @@ layers_memory = 4;
 
 mask = imgaussfilt(grayImage) >= 20;
 
-img_transformed = transform_image(grayImage+1, gauss_range, sigma, mask);
+img_transformed = transform_image(grayImage, gauss_range, sigma, mask);
 
 figure
 subplot(1,2,1)

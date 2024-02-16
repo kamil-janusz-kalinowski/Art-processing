@@ -7,7 +7,7 @@ img_processed = preprocessGrayImage(img_origin);
 img_processed = imadjust(img_processed, [0.2, 1]).^2;
 
 radius_circle = 2;
-num_of_circles = 400;
+num_of_circles = 300;
 
 img_final = zeros(size(img_processed));
 img_probabilty = img_processed;
